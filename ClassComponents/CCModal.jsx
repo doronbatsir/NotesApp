@@ -20,8 +20,12 @@ class App extends Component {
   }
   BTNSaveCategory=()=>{
     this.setModalVisible(!this.state.modalVisible);
+    if(this.state.Cname!==null&&this.state.Cname!==""&&this.state.Cname!==undefined)
+    {
     this.props.sendToHome(this.state.Cname);
+    this.setState({Cname:""});
     console.log(this.state.Cname)
+  }
   }
 
   render() {
@@ -39,7 +43,8 @@ class App extends Component {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Category Name:</Text>
-              <TextInput placeholder="Category Name" style={{ height: 40, borderColor: 'gray', borderWidth: 1 ,width:170, margin:20}} onChangeText={value=>this.setState({Cname:value})}/>
+              <TextInput placeholder="Category Name" style={{ height: 40, borderColor: 'gray', borderWidth: 1 ,width:170, margin:20}} 
+              onChangeText={value=>this.setState({Cname:value})}/>
             <View style={{flexDirection:"row"}}>
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "#2196F3", margin:5}}

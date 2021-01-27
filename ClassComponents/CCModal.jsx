@@ -8,6 +8,8 @@ import {
   View
 } from "react-native";
 
+import { TextInput } from 'react-native';
+
 class App extends Component {
   state = {
     modalVisible: false
@@ -15,6 +17,11 @@ class App extends Component {
 
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
+  }
+  BTNSaveCategory=()=>{
+    this.setModalVisible(!this.state.modalVisible);
+    this.props.sendToHome(this.state.Cname);
+    console.log(this.state.Cname)
   }
 
   render() {
@@ -31,16 +38,24 @@ class App extends Component {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-
+              <Text style={styles.modalText}>Category Name:</Text>
+              <TextInput placeholder="Category Name" style={{ height: 40, borderColor: 'gray', borderWidth: 1 ,width:170, margin:20}} onChangeText={value=>this.setState({Cname:value})}/>
+            <View style={{flexDirection:"row"}}>
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                style={{ ...styles.openButton, backgroundColor: "#2196F3", margin:5}}
+                onPress={this.BTNSaveCategory}
+              >
+                <Text style={styles.textStyle}>Save</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3", margin:5 }}
                 onPress={() => {
                   this.setModalVisible(!modalVisible);
                 }}
               >
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
+              </View>
             </View>
           </View>
         </Modal>
@@ -51,7 +66,7 @@ class App extends Component {
             this.setModalVisible(true);
           }}
         >
-          <Text style={styles.textStyle}>Show Modal</Text>
+          <Text style={styles.textStyle}>Add Category +</Text>
         </TouchableHighlight>
       </View>
     );

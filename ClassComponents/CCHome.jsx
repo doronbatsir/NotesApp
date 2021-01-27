@@ -3,7 +3,7 @@ import { Button } from 'react-native';
 import { View, Text } from 'react-native';
 import FCCategory from '../FunctionalComponents/FCCategory';
 import CCModal from '../ClassComponents/CCModal';
-
+//import { AsyncStorage } from 'react-native-async-storage/async-storage';
   
 
 export default class CCHome extends Component {
@@ -11,10 +11,10 @@ export default class CCHome extends Component {
     constructor(props){
         super(props);
         this.state={
-            categoriesArr:null
+            categoriesArr:[]
         };
 
-        this.apiUrl ='http://localhost:56451/api/Categories/';
+        //this.apiUrl ='http://localhost:56451/api/Categories/';
     }
  
     //     componentDidMount =() =>
@@ -48,13 +48,26 @@ export default class CCHome extends Component {
     //     console.log('end');
     // }
 
-
+    addCategory = (categoryName) => {
+        this.setState({ categoriesArr: [...this.state.categoriesArr, categoryName] },
+            ()=>console.log(this.state.categoriesArr))
+        
+    //     try {
+    //       await AsyncStorage.setItem(
+    //         'Categories',
+    //         JSON.stringify(this.state.categoriesArr)
+    //       );
+    //     } catch (error) {
+    //       // Error saving data
+    //     }
+       }
     render() {
         return (
             <View>
-               {this.state.categoriesArr!==null ? this.state.categoriesArr.map((category,index) => <FCCategory key = {index} name = {category.Name} amount = {category.NList.length}/>):[]}
-               {/* <Button title = "+++" onPress={this.btnAddCategory}/> */}
-               <CCModal/>
+               {/* {this.state.categoriesArr.length!==0 ? this.state.categoriesArr.map((category,index) => <FCCategory key = {index} name = {category} amount = "3"/>):<Text>null</Text>} */}
+               {<Button title = "+++" onPress={this.btnAddCategory}/>}
+               <CCModal sendToHome={this.addCategory}/>
+
         </View>
         )
     }

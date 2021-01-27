@@ -52,7 +52,7 @@ export default class CCHome extends Component {
                 <Text>My Notes</Text>
                <View style={styles.centeredView}>
                {this.state.categoriesArr.length!==0 ? this.state.categoriesArr.map((category,index) => 
-               <FCCategory key = {index} name = {category.name} amount = {category.notes.length}/>):[]}
+               <FCCategory key = {index} name = {category.name} amount = {category.notes.length} />):[]}
               </View>
                <CCModal sendToHome={this.addCategory}/>
                <TouchableHighlight

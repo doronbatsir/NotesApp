@@ -17,36 +17,36 @@ export default class CCHome extends Component {
         this.apiUrl ='http://localhost:56451/api/Categories/';
     }
  
-        componentDidMount =() =>
-        {
-        console.log('GETstart');
-        fetch(this.apiUrl,
-          {
-            method: 'GET',
-            headers: new Headers({
-              'Content-Type': 'application/json; charset=UTF-8',
-              'Accept': 'application/json; charset=UTF-8'
-            })
-          })
-          .then((res)=>{
-             console.log('res=', res);
+    //     componentDidMount =() =>
+    //     {
+    //     console.log('GETstart');
+    //     fetch(this.apiUrl,
+    //       {
+    //         method: 'GET',
+    //         headers: new Headers({
+    //           'Content-Type': 'application/json; charset=UTF-8',
+    //           'Accept': 'application/json; charset=UTF-8'
+    //         })
+    //       })
+    //       .then((res)=>{
+    //          console.log('res=', res);
              
-             console.log('res.ok', res.ok);
-            return res.json();
-          })
-          .then(
-            (result) => {
-                console.log("fetch btnFetchGetRec= ", result);
-                result.map(rec => console.log(rec.Name));
-                //console.log('result[0].FullName=', result[0].Name);
-                this.setState({categoriesArr:result});
+    //          console.log('res.ok', res.ok);
+    //         return res.json();
+    //       })
+    //       .then(
+    //         (result) => {
+    //             console.log("fetch btnFetchGetRec= ", result);
+    //             result.map(rec => console.log(rec.Name));
+    //             //console.log('result[0].FullName=', result[0].Name);
+    //             this.setState({categoriesArr:result});
 
-              },
-            (error) => {
-              console.log("err post=", error);
-            });
-        console.log('end');
-    }
+    //           },
+    //         (error) => {
+    //           console.log("err post=", error);
+    //         });
+    //     console.log('end');
+    // }
 
 
     render() {

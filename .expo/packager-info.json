@@ -1,0 +1,10 @@
+{
+  "devToolsPort": 19002,
+  "expoServerPort": 19000,
+  "packagerPort": 19000,
+  "expoServerNgrokUrl": "https://x5-67s.anonymous.notesapp-1.exp.direct",
+  "packagerNgrokUrl": "https://packager.x5-67s.anonymous.notesapp-1.exp.direct",
+  "ngrokPid": 21720,
+  "packagerPid": null,
+  "webpackServerPort": null
+}

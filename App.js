@@ -7,7 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CCNotes from './ClassComponents/CCNotes';
 import FCNote from './FunctionalComponents/FCNote';
 import FCCategory from './FunctionalComponents/FCCategory';
-
+import CCAddNote from './ClassComponents/CCAddNote';
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -18,6 +18,7 @@ export default function App() {
           <Stack.Screen name="CCHome" component={CCHome} />
           <Stack.Screen name="CCNotes" component={CCNotes} />
           <Stack.Screen name="FCCategory" component={FCCategory} />
+          <Stack.Screen name="CCAddNote" component={CCAddNote} />
         </Stack.Navigator>
       </NavigationContainer>
   );

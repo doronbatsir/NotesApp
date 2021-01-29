@@ -15,6 +15,7 @@ export default class CCHome extends Component {
     }
 
     componentDidMount=async()=>{
+      console.log("componentDidMount");
             const value = await AsyncStorage.getItem('Categories');
             if (value !== null) {
               console.log(value);
@@ -52,7 +53,7 @@ export default class CCHome extends Component {
                 <Text>My Notes</Text>
                <View style={styles.centeredView}>
                {this.state.categoriesArr.length!==0 ? this.state.categoriesArr.map((category,index) => 
-               <FCCategory key = {index} name = {category.name} amount = {category.notes.length} />):[]}
+               <FCCategory key = {index} name = {category.name} amount = {category.notes.length} notes={category.notes}/>):[]}
               </View>
                <CCModal sendToHome={this.addCategory}/>
                <TouchableHighlight
@@ -64,19 +65,8 @@ export default class CCHome extends Component {
                             return true;
                         }
                         catch(exception) {
-                            return false;
-                        }
-                    }
-            }
-              >
+                            return false;}}}>
                 <Text style={styles.textStyle}>clear</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={styles.openButton}
-                onPress={() => this.props.navigation.navigate('CCNotes')
-            }
-              >
-                <Text style={styles.textStyle}>to note page</Text>
               </TouchableHighlight>
         </View>
         )

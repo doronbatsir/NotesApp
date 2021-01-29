@@ -10,19 +10,25 @@ export default class CCHome extends Component {
     constructor(props){
         super(props);
         this.state={
-            categoriesArr:[]
+            categoriesArr:[],
+            notesCount:0
         };
     }
 
-    componentDidMount=async()=>{
+    componentDidMount=()=>{
       console.log("componentDidMount");
-            const value = await AsyncStorage.getItem('Categories');
-            if (value !== null) {
-              console.log(value);
-                this.setState({categoriesArr:JSON.parse(value)})
-            }
+      this.props.navigation.addListener('focus',this.load)
     }
-    
+    load =async() => {
+      console.log("load");
+      const value = await AsyncStorage.getItem('Categories');
+      if (value !== null) {
+        console.log(value);
+          this.setState({categoriesArr:JSON.parse(value)})
+      }
+    }
+
+
     addCategory = (categoryName) => {
         let OBJCategory={name:categoryName,notes:[]}
         this.setState({ categoriesArr: [...this.state.categoriesArr, OBJCategory] },

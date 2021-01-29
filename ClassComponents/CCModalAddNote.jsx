@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   textArea: {
     height: 150,
     justifyContent: "flex-start",
-    height: 200,
+    height: 50,
      borderColor: 'gray',
       borderWidth: 1 ,
       width:200,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
        marginBottom:15
   },
   modalView: {
-    margin: 20,
+    marginBottom: 200,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 35,

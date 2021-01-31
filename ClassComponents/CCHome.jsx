@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native';
-import { View, Text,StyleSheet,TouchableHighlight } from 'react-native';
+import { View, Text,StyleSheet,TouchableHighlight,ScrollView } from 'react-native';
 import FCCategory from '../FunctionalComponents/FCCategory';
 import CCModal from '../ClassComponents/CCModal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -17,6 +17,7 @@ export default class CCHome extends Component {
 
     componentDidMount=()=>{
       console.log("componentDidMount");
+      this.load();
       this.props.navigation.addListener('focus',this.load)
     }
     load =async() => {
@@ -52,38 +53,30 @@ export default class CCHome extends Component {
             console.log("errrrrnull!!");
         }
     }
-
+    deleteFromArr = (index) => {
+      newArr = this.state.categoriesArr;
+      newArr.splice(index, 1)
+      this.setState({ categoriesArr: newArr })
+      this.save2Storage();
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Text>My Notes</Text>
-               <View style={styles.centeredView}>
+                <Text style={{marginTop:40,fontSize:30,fontWeight:'bold'}}>My Notes</Text>
+               <ScrollView style={styles.centeredView}>
                {this.state.categoriesArr.length!==0 ? this.state.categoriesArr.map((category,index) => 
-               <FCCategory key = {index} name = {category.name} amount = {category.notes.length} notes={category.notes}/>):[]}
-              </View>
+               <FCCategory key = {index} index={index} name = {category.name} 
+               amount = {category.notes.length} notes={category.notes} deleteCategory={this.deleteFromArr}/>):[]}
+              </ScrollView>
                <CCModal sendToHome={this.addCategory}/>
-               <TouchableHighlight
-                style={styles.openButton}
-                onPress={async() => {
-                        try {
-                            await AsyncStorage.removeItem('Categories');
-                            this.setState({categoriesArr:[]})
-                            return true;
-                        }
-                        catch(exception) {
-                            return false;}}}>
-                <Text style={styles.textStyle}>clear</Text>
-              </TouchableHighlight>
         </View>
         )
     }
 }
 const styles = StyleSheet.create({
     centeredView: {
-        flex:1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 100
+        height:360,
+        marginTop: 0
       },
       container: {
         flex: 1,

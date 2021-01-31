@@ -43,7 +43,7 @@ class App extends Component {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Category Name:</Text>
-              <TextInput placeholder="Category Name" style={{ height: 40, borderColor: 'gray', borderWidth: 1 ,width:170, margin:20}} 
+              <TextInput placeholder="Category Name" style={{ height: 40, borderColor: 'gray',borderRadius: 10, borderWidth: 1 ,width:170, margin:20}} 
               onChangeText={value=>this.setState({Cname:value})}/>
             <View style={{flexDirection:"row"}}>
               <TouchableHighlight
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 22
+    marginTop: 1
   },
   modalView: {
     margin: 20,

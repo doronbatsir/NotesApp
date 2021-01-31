@@ -7,20 +7,22 @@ import { createStackNavigator } from '@react-navigation/stack';
 import CCNotes from './ClassComponents/CCNotes';
 import FCNote from './FunctionalComponents/FCNote';
 import FCCategory from './FunctionalComponents/FCCategory';
-import CCAddNote from './ClassComponents/CCAddNote';
+import CCModalAddNote from './ClassComponents/CCModalAddNote';
+import CameraPage from './ClassComponents/CameraPage';
+
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
 
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="CCHome">
-          <Stack.Screen name="CCHome" component={CCHome} />
-          <Stack.Screen name="CCNotes" component={CCNotes} />
-          <Stack.Screen name="FCCategory" component={FCCategory} />
-          <Stack.Screen name="CCAddNote" component={CCAddNote} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="CCHome">
+        <Stack.Screen name="CCHome" component={CCHome} />
+        <Stack.Screen name="CCNotes" component={CCNotes} />
+        <Stack.Screen name="CCModalAddNote" component={CCModalAddNote} />
+        <Stack.Screen name="CameraPage" component={CameraPage} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 

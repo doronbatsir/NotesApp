@@ -37,7 +37,7 @@ const showAlert=()=>{
 </View>
   <Card.Title>{props.title}</Card.Title>
   <Card.Divider/>
-  {props.image!==""?<Card.Image source={{ uri: props.image }}></Card.Image>:<Text></Text>}
+  {props.image!=="../assets/noImage.png"&&props.image!==""?<Card.Image source={{ uri: props.image }}></Card.Image>:<Text></Text>}
   
   <Text style={{marginBottom: 10,width:300}}>
       {props.content}

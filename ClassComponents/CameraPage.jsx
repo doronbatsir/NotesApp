@@ -42,7 +42,6 @@ export default class CameraPage extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-          <ImageBackground source={require('../assets/notesimg.jpg')} style={stylesCP.backgroundImage} >
           <View style={styles.Content}>
             <View style={{ alignItems: 'center' }}>
               <View style={{
@@ -130,7 +129,6 @@ export default class CameraPage extends React.Component {
 
             </View>
           </View>
-          </ImageBackground>
         </View>
       );
     }

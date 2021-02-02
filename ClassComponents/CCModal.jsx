@@ -12,13 +12,16 @@ import { TextInput } from 'react-native';
 
 class App extends Component {
   state = {
-    modalVisible: false
+    modalVisible: false,
+    Cname:""
   };
 
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
   }
   BTNSaveCategory=()=>{
+    let isExist=this.props.categoriesArr.some(category=>category.name===this.state.Cname)
+    if(!isExist){
     this.setModalVisible(!this.state.modalVisible);
     if(this.state.Cname!==null&&this.state.Cname!==""&&this.state.Cname!==undefined)
     {
@@ -26,6 +29,10 @@ class App extends Component {
     this.setState({Cname:""});
     console.log(this.state.Cname)
   }
+}
+else{
+  Alert.alert("the category name is already exist")
+}
   }
 
   render() {
@@ -55,8 +62,9 @@ class App extends Component {
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#90dea2", margin:5}}
+                style={this.state.Cname == "" ? styles.disabled : styles.saveButton}
                 onPress={this.BTNSaveCategory}
+                disabled={!this.state.Cname} 
               >
                 <Text style={styles.textStyle}>Save</Text>
               </TouchableHighlight>
@@ -106,6 +114,23 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2
+  },
+  saveButton: {
+    backgroundColor: "#828787",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: "#90dea2",
+    margin:5
+  },
+  disabled: {
+    backgroundColor: "#828787",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: "#90dea2",
+    margin:5,
+    opacity:0.5
   },
   textStyle: {
     color: "white",

@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
-  View,Image, KeyboardAvoidingView
+  View, Image, KeyboardAvoidingView
 } from "react-native";
 import { Input } from 'react-native-elements';
 import moment from "moment";
@@ -16,16 +16,20 @@ import { useNavigation } from '@react-navigation/native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as ImagePicker from 'expo-image-picker';
+import CCModalCamera from '../ClassComponents/CCModalCamera';
 //import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 class CCModalAddNote extends Component {
   constructor(props) {
-  super(props)
-  this.state = {
-    modalVisible: false,
-    hasCameraPermission:null
-  };
-}
+    super(props)
+    this.state = {
+      modalVisible: false,
+      hasCameraPermission: null,
+      title: "",
+      content: "",
+      image: '../assets/noImage.png'
+    };
+  }
 
   setModalVisible = (visible) => {
     this.setState({ modalVisible: visible });
@@ -33,33 +37,34 @@ class CCModalAddNote extends Component {
   BTNSaveNote = () => {
     this.setModalVisible(!this.state.modalVisible);
     if ((this.state.title !== null && this.state.title !== "" && this.state.title !== undefined) && (this.state.content !== null && this.state.content !== "" && this.state.content !== undefined)) {
-      this.setState({ title: "" });
-      console.log(this.state.title)
-      this.setState({ content: "" });
-      console.log(this.state.content)
-      let OBJNote = { title: this.state.title, content: this.state.content,
-        image:this.state.image, time: moment().format("DD-MM-YYYY hh:mm") }
+      let OBJNote = {
+        title: this.state.title, content: this.state.content,
+        image: this.state.image, time: moment().format("DD-MM-YYYY hh:mm")
+      }
       this.props.sendToNotes(OBJNote);
-      this.setState({ image: ""});
     }
+    this.setState({ title: "", content: "", image: '../assets/noImage.png' });
+  }
+  btnCancel = () => {
+    this.setModalVisible(!this.state.modalVisible);
+    this.setState({ title: "", content: "", image: '../assets/noImage.png' });
   }
   btnOpenGalery = async () => {
     console.log("btnOpenGalery");
     let result = await ImagePicker.launchImageLibraryAsync({
-        //allowsEditing: true,
-        //aspect: [4, 3],
+      //allowsEditing: true,
+      //aspect: [4, 3],
     });
     if (!result.cancelled) {
-        this.setState({ image: result.uri });
-        
+      this.setState({ image: result.uri });
     }
-};
-btnOpenCamera=()=>{
-  this.setModalVisible(!this.state.modalVisible);
-  this.props.navigation.navigate('CameraPage')
-};
+  };
 
-  render=()=> {
+  getFromCamera = (imgUri) => {
+    this.setState({ image: imgUri })
+  }
+
+  render = () => {
     let { image } = this.state;
     const { modalVisible } = this.state;
     return (
@@ -69,7 +74,7 @@ btnOpenCamera=()=>{
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
+            this.setModalVisible(!this.state.modalVisible);
           }}
         >
           <View style={styles.centeredView}>
@@ -89,43 +94,39 @@ btnOpenCamera=()=>{
                 onChangeText={value => this.setState({ content: value })}
               />
               <View style={{ flexDirection: 'row' }}>
-                <Icon
-                  style={{}}
-                  reverse
-                  name='add-a-photo'
-                  type='material'
-                  color='#8ed0d1'
-                  size={20}
-                  onPress={this.btnOpenCamera}
-                />
                 <KeyboardAvoidingView behavior="padding">
-                <Icon
-                  style={{}}
-                  reverse
-                  name='add-photo-alternate'
-                  type='material'
-                  color='#8ed0d1'
-                  size={20}
-                  onPress={this.btnOpenGalery}
-                />
+                  <CCModalCamera send2AddNote={this.getFromCamera} />
+                  <Icon
+                    style={{}}
+                    reverse
+                    name='add-photo-alternate'
+                    type='material'
+                    color='#8ed0d1'
+                    size={20}
+                    onPress={this.btnOpenGalery}
+                  />
+
                 </KeyboardAvoidingView>
+
+                <View style={styles.placeHolder}>
+                  <Image
+                    style={styles.image}
+                    source={{ uri: this.state.image }}
+                  ></Image>
+                </View>
               </View>
               <View style={{ flexDirection: "row" }}>
-              <TouchableHighlight
+                <TouchableHighlight
                   style={{ ...styles.openButton, backgroundColor: "#e8a297", margin: 5 }}
-                  onPress={() => {
-                    this.setModalVisible(!modalVisible);
-                  }}
-                >
+                  onPress={this.btnCancel}>
                   <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  style={{ ...styles.openButton, backgroundColor: "#90dea2", margin: 5 }}
-                  onPress={this.BTNSaveNote}
+                  style={this.state.title == "" || this.state.content == "" ? styles.disabled : styles.saveButton}
+                  disabled={this.state.title == "" || this.state.content == ""} onPress={this.BTNSaveNote}
                 >
                   <Text style={styles.textStyle}>Save</Text>
                 </TouchableHighlight>
-
               </View>
             </View>
           </View>
@@ -151,6 +152,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 1,
 
+  },
+  placeHolder: {
+    //flex: 1,
+    width: 100,
+    borderColor: 'black',
+    borderWidth: 1,
+    margin: 10,
+    height: 100
+  },
+  image: {
+    flex: 1,
+    //width: 300
   },
   textArea: {
     height: 150,
@@ -183,7 +196,24 @@ const styles = StyleSheet.create({
     backgroundColor: "#F194FF",
     borderRadius: 20,
     padding: 10,
-    elevation: 2
+    elevation: 2,
+
+  },
+  saveButton: {
+    //backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: "#90dea2",
+    margin: 5
+  },
+  disabled: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    backgroundColor: "#90dea2",
+    margin: 5,
+    opacity: 0.5
   },
   openButtonAdd: {
     backgroundColor: "#828787",
@@ -196,7 +226,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
-    fontSize:16
+    fontSize: 16
   },
 
   modalText: {

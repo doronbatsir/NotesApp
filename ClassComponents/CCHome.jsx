@@ -75,7 +75,7 @@ export default class CCHome extends Component {
                <FCCategory key = {index} index={index} name = {category.name} 
                amount = {category.notes.length} notes={category.notes} deleteCategory={this.deleteFromArr}/>):[]}
               </ScrollView>
-               <CCModal sendToHome={this.addCategory}/>
+               <CCModal sendToHome={this.addCategory} categoriesArr={this.state.categoriesArr}/>
                </ImageBackground>
         </View>
         )

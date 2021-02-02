@@ -94,13 +94,7 @@ const styles = StyleSheet.create({
       },
       backgroundImage: {
         flex: 1,
-        // width: undefined,
-        // height: undefined,
-        // flexDirection: 'column',
-        // backgroundColor:'transparent',
-        // justifyContent: 'flex-start',
-        width: '100%', height: '100%',
-        
-    
+        width: '100%',
+        height: '100%'
     }
   });

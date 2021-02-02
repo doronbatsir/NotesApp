@@ -64,7 +64,7 @@ export default class CCNotes extends Component {
   renderBack=()=>{
     return  <Icon
     style={{ alignSelf: 'flex-end' }}
-    name='arrow-right'
+    name='arrow-left'
     type='simple-line-icon'
     color='white'
     size={24}
@@ -76,8 +76,8 @@ export default class CCNotes extends Component {
       <View style={styles.container}>
         <ImageBackground source={require('../assets/notesimg.jpg')} style={styles.backgroundImage} >
                 <Header
+                  leftComponent={this.renderBack()}
   centerComponent={{ text:this.props.route.params.name + "-" + this.state.notesArr.length, style: { color: '#fff',fontSize:26,fontWeight:'bold'} }}
-  rightComponent={this.renderBack()}
   containerStyle={{backgroundColor:'#35BEB7'}}/>
 
         <ScrollView style={{ height: 490 }}>

@@ -15,7 +15,8 @@ export default StyleSheet.create({
         flex: 5,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 30
+        marginBottom: 30,
+        marginTop:30
     },
     textBig: {
         fontSize: 35,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Button, Text, View, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Button, Text, View, Dimensions, Image, TouchableOpacity,ImageBackground } from 'react-native';
 import styles from '../pageStyle';
 import { Camera } from 'expo-camera';
 import { Icon } from 'react-native-elements';
@@ -42,7 +42,7 @@ export default class CameraPage extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-          <Text style={{marginTop:35}}>Camera</Text>
+          <ImageBackground source={require('../assets/notesimg.jpg')} style={stylesCP.backgroundImage} >
           <View style={styles.Content}>
             <View style={{ alignItems: 'center' }}>
               <View style={{
@@ -90,7 +90,7 @@ export default class CameraPage extends React.Component {
                   reverse
                   name='add-a-photo'
                   type='material'
-                  color='blue'
+                  color='#35BEB7'
                   size={20}
                   
                 />
@@ -130,6 +130,7 @@ export default class CameraPage extends React.Component {
 
             </View>
           </View>
+          </ImageBackground>
         </View>
       );
     }
@@ -149,5 +150,10 @@ const stylesCP = StyleSheet.create({
   image: {
     flex: 1,
     //width: 300
-  }
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+     height: '100%',
+}
 });

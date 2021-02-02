@@ -43,23 +43,24 @@ class App extends Component {
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
               <Text style={styles.modalText}>Category Name:</Text>
-              <TextInput placeholder="Category Name" style={{ height: 40, borderColor: 'gray',borderRadius: 10, borderWidth: 1 ,width:170, margin:20}} 
+              <TextInput placeholder="Category Name" style={{ height: 40, borderColor: 'gray',borderRadius: 10, borderWidth: 1 ,width:190, margin:15}} 
               onChangeText={value=>this.setState({Cname:value})}/>
             <View style={{flexDirection:"row"}}>
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3", margin:5}}
-                onPress={this.BTNSaveCategory}
-              >
-                <Text style={styles.textStyle}>Save</Text>
-              </TouchableHighlight>
-              <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3", margin:5 }}
+            <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#e8a297", margin:5 }}
                 onPress={() => {
                   this.setModalVisible(!modalVisible);
                 }}
               >
                 <Text style={styles.textStyle}>Cancel</Text>
               </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#90dea2", margin:5}}
+                onPress={this.BTNSaveCategory}
+              >
+                <Text style={styles.textStyle}>Save</Text>
+              </TouchableHighlight>
+
               </View>
             </View>
           </View>
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
     elevation: 5
   },
   openButton: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#828787",
     borderRadius: 20,
     padding: 10,
     elevation: 2
@@ -109,11 +110,13 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize:16
   },
   modalText: {
-    marginBottom: 15,
-    textAlign: "center"
+    marginBottom: 10,
+    textAlign: "center",
+    fontSize:17
   }
 });
 

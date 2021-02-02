@@ -48,7 +48,7 @@ const showAlert=()=>{
 }
 const styles = StyleSheet.create({
     openButton: {
-      backgroundColor: "#8ed0d1",
+      backgroundColor: "#35BEB7",
       borderRadius: 20,
       padding: 10,
       elevation: 2,

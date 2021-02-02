@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableHighlight, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, TouchableHighlight, ScrollView,ImageBackground } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Button } from 'react-native';
@@ -8,6 +8,7 @@ import CCModalAddNote from '../ClassComponents/CCModalAddNote';
 import FCNote from '../FunctionalComponents/FCNote';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Icon } from 'react-native-elements'
+import { Header } from 'react-native-elements'
 
 export default class CCNotes extends Component {
   constructor(props) {
@@ -60,29 +61,24 @@ export default class CCNotes extends Component {
     this.setState({ notesArr: newArr })
     this.GetFromStorage();
   }
+  renderBack=()=>{
+    return  <Icon
+    style={{ alignSelf: 'flex-end' }}
+    name='arrow-right'
+    type='simple-line-icon'
+    color='white'
+    size={24}
+    onPress={onPress=() => this.props.navigation.navigate('CCHome')}
+  />
+  }
   render() {
     return (
       <View style={styles.container}>
-        
-        <TouchableHighlight style={{ marginLeft: 270, marginTop: 40, marginBottom: 10 }}
-          onPress={() => this.props.navigation.navigate('CCHome')}>
-
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={{ fontSize: 14 }}> Back</Text>
-            <Icon
-              style={{ alignSelf: 'flex-end' }}
-              name='arrow-right'
-              type='simple-line-icon'
-              color='black'
-              size={14}
-            />
-
-          </View>
-        </TouchableHighlight>
-        
-
-        <Text style={{ fontWeight: 'bold', fontSize: 22 }}>
-          {this.props.route.params.name + "                       " + this.state.notesArr.length}</Text>
+        <ImageBackground source={require('../assets/notesimg.jpg')} style={styles.backgroundImage} >
+                <Header
+  centerComponent={{ text:this.props.route.params.name + "-" + this.state.notesArr.length, style: { color: '#fff',fontSize:26,fontWeight:'bold'} }}
+  rightComponent={this.renderBack()}
+  containerStyle={{backgroundColor:'#35BEB7'}}/>
 
         <ScrollView style={{ height: 490 }}>
           {this.state.notesArr.length !== 0 ? this.state.notesArr.map((note, index) =>
@@ -91,7 +87,7 @@ export default class CCNotes extends Component {
         </ScrollView>
 
         <CCModalAddNote sendToNotes={this.getFromAddNote} navigation={this.props.navigation} />
-
+        </ImageBackground>
       </View>
 
     )
@@ -103,7 +99,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-
-
-  }
+  },      
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+     height: '100%',
+}
 });

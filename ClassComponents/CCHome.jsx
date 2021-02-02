@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Button } from 'react-native';
-import { View, Text,StyleSheet,TouchableHighlight,ScrollView } from 'react-native';
+import { View, Text,StyleSheet,TouchableHighlight,ScrollView,ImageBackground } from 'react-native';
 import FCCategory from '../FunctionalComponents/FCCategory';
 import CCModal from '../ClassComponents/CCModal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Header } from 'react-native-elements'
+
 
 export default class CCHome extends Component {
   
@@ -62,13 +64,19 @@ export default class CCHome extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={{marginTop:40,fontSize:30,fontWeight:'bold'}}>My Notes</Text>
+              <ImageBackground source={require('../assets/notesimg.jpg')} style={styles.backgroundImage} >
+        
+              <Header
+  centerComponent={{ text: 'MY NOTES', style: { color: '#fff',fontSize:26,fontWeight:'bold'} }}
+  containerStyle={{backgroundColor:'#35BEB7',marginBottom:20}}/>
+                
                <ScrollView style={styles.centeredView}>
                {this.state.categoriesArr.length!==0 ? this.state.categoriesArr.map((category,index) => 
                <FCCategory key = {index} index={index} name = {category.name} 
                amount = {category.notes.length} notes={category.notes} deleteCategory={this.deleteFromArr}/>):[]}
               </ScrollView>
                <CCModal sendToHome={this.addCategory}/>
+               </ImageBackground>
         </View>
         )
     }
@@ -83,5 +91,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-      }
+      },
+      backgroundImage: {
+        flex: 1,
+        // width: undefined,
+        // height: undefined,
+        // flexDirection: 'column',
+        // backgroundColor:'transparent',
+        // justifyContent: 'flex-start',
+        width: '100%', height: '100%',
+        
+    
+    }
   });

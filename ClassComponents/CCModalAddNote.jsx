@@ -112,7 +112,7 @@ btnOpenCamera=()=>{
               </View>
               <View style={{ flexDirection: "row" }}>
               <TouchableHighlight
-                  style={{ ...styles.openButton, backgroundColor: "#2196F3", margin: 5 }}
+                  style={{ ...styles.openButton, backgroundColor: "#e8a297", margin: 5 }}
                   onPress={() => {
                     this.setModalVisible(!modalVisible);
                   }}
@@ -120,7 +120,7 @@ btnOpenCamera=()=>{
                   <Text style={styles.textStyle}>Cancel</Text>
                 </TouchableHighlight>
                 <TouchableHighlight
-                  style={{ ...styles.openButton, backgroundColor: "#2196F3", margin: 5 }}
+                  style={{ ...styles.openButton, backgroundColor: "#90dea2", margin: 5 }}
                   onPress={this.BTNSaveNote}
                 >
                   <Text style={styles.textStyle}>Save</Text>
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     elevation: 2
   },
   openButtonAdd: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#828787",
     borderRadius: 20,
     padding: 10,
     elevation: 2,
@@ -195,7 +195,8 @@ const styles = StyleSheet.create({
   textStyle: {
     color: "white",
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    fontSize:16
   },
 
   modalText: {
